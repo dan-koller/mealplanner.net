@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "path": "Mealplanner.Common.EntityModels.Sqlite"
+        },
+        {
+            "path": "Mealplanner.Common.DataContext.Sqlite"
+        },
+        {
+            "path": "Mealplanner.Common.UnitTests"
+        }
+    ]
+}
