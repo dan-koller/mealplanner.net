@@ -8,6 +8,9 @@
         },
         {
             "path": "Mealplanner.Common.UnitTests"
+        },
+        {
+            "path": "Mealplanner.Common.Console"
         }
     ]
 }
