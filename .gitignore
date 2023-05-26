@@ -12,3 +12,4 @@ obj/
 # Misc
 .DS_Store
 *.db
+*.db*
