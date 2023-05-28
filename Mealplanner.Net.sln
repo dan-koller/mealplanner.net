@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mealplanner.Common.EntityMo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mealplanner.Common.UnitTests", "Mealplanner.Common.UnitTests\Mealplanner.Common.UnitTests.csproj", "{B4D4C592-7AE2-4695-AD4B-CF055E534872}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mealplanner.Common.Console", "Mealplanner.Common.Console\Mealplanner.Common.Console.csproj", "{95991B4F-63C3-45FC-A91B-36808C9C879F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{B4D4C592-7AE2-4695-AD4B-CF055E534872}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4D4C592-7AE2-4695-AD4B-CF055E534872}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4D4C592-7AE2-4695-AD4B-CF055E534872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95991B4F-63C3-45FC-A91B-36808C9C879F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95991B4F-63C3-45FC-A91B-36808C9C879F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95991B4F-63C3-45FC-A91B-36808C9C879F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95991B4F-63C3-45FC-A91B-36808C9C879F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
