@@ -87,4 +87,43 @@ partial class Program
         }
         return IngredientArrayToString(ingredients!);
     }
+
+    private static void ShowMealDialog()
+    {
+        WriteLine("Which category do you want to print (breakfast, lunch, dinner)?");
+        string? mealCategory;
+        bool isVerifiedCategory = false;
+        while (!isVerifiedCategory)
+        {
+            mealCategory = ReadLine();
+            if (mealCategory is not null && validMealCategory.IsMatch(mealCategory))
+            {
+                isVerifiedCategory = true;
+                ShowMealByCategory(mealCategory);
+            }
+            else
+            {
+                WriteLine("Please enter a valid meal category (breakfast, lunch, dinner).");
+            }
+        }
+    }
+
+    private static void ShowMealByCategory(string mealCategory)
+    {
+        List<Meal> meals = GetMealsByCategory(mealCategory);
+        if (meals is not null)
+        {
+            WriteLine($"Category: {mealCategory}");
+            foreach (Meal meal in meals)
+            {
+                WriteLine($"Name: {meal.MealName}");
+                WriteLine("Ingredients:");
+                foreach (string ingredient in meal.MealIngredients.Split(","))
+                {
+                    WriteLine($"- {ingredient}");
+                }
+                WriteLine();
+            }
+        }
+    }
 }

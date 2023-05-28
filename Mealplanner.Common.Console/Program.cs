@@ -1,8 +1,4 @@
-﻿using System.Text.RegularExpressions; // Regex
-
-using Mealplanner.Net;
-
-bool terminated = false;
+﻿bool terminated = false;
 
 while (!terminated)
 {
@@ -12,6 +8,9 @@ while (!terminated)
     {
         case "add":
             AddMealDialog();
+            break;
+        case "show":
+            ShowMealDialog();
             break;
         case "exit":
             WriteLine("Goodbye!");

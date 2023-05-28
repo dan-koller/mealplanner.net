@@ -22,4 +22,25 @@ partial class Program
             }
         }
     }
+
+    static List<Meal> GetMealsByCategory(string category)
+    {
+        using (MealplannerContext db = new())
+        {
+            IQueryable<Meal> meals = db.Meals.Where(m => m.MealCategory == category);
+
+            if (meals is null || (!meals.Any()))
+            {
+                // no meal with id found
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No meals found in the {category} category.");
+                Console.ResetColor();
+                return null!;
+            }
+            else
+            {
+                return meals.ToList();
+            }
+        }
+    }
 }
