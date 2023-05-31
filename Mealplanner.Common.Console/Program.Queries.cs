@@ -43,4 +43,25 @@ partial class Program
             }
         }
     }
+
+    static List<Ingredient> GetAllIngredients()
+    {
+        using (MealplannerContext db = new())
+        {
+            IQueryable<Ingredient> ingredients = db.Ingredients;
+
+            if (ingredients is null || (!ingredients.Any()))
+            {
+                // no meal with id found
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No ingredients found in the database.");
+                Console.ResetColor();
+                return new List<Ingredient>(); // return empty list
+            }
+            else
+            {
+                return ingredients.ToList();
+            }
+        }
+    }
 }

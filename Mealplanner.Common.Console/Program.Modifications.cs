@@ -6,14 +6,34 @@ using Mealplanner.Net;
 
 partial class Program
 {
-    // TODO: Move this function to Program.Manipulation.cs
     static int AddMeal(Meal meal)
     {
         using (MealplannerContext db = new())
         {
+            // Add each ingredient of the meal to the database
+            List<string> mealIngredients = new(meal.MealIngredients.Split(","));
+            List<Ingredient> ingredients = GetAllIngredients();
+            foreach (string ingredient in mealIngredients)
+            {
+                Ingredient i = new(ingredient);
+                if (!ingredients.Contains(i))
+                {
+                    AddIngredient(i); // don't need the id (may be useful for error handling)
+                }
+            }
             db.Meals.Add(meal);
             db.SaveChanges();
             return meal.MealId;
+        }
+    }
+
+    static int AddIngredient(Ingredient ingredient)
+    {
+        using (MealplannerContext db = new())
+        {
+            db.Ingredients.Add(ingredient);
+            db.SaveChanges();
+            return ingredient.IngredientId;
         }
     }
 
