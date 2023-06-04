@@ -24,6 +24,7 @@ public partial class MealplannerContext : DbContext
     // This represents the table in the database.
     public virtual DbSet<Meal> Meals { get; set; } = null!;
     public virtual DbSet<Ingredient> Ingredients { get; set; } = null!;
+    public virtual DbSet<Plan> Plans { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

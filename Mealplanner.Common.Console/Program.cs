@@ -12,6 +12,12 @@ while (!terminated)
         case "show":
             ShowMealDialog();
             break;
+        case "plan":
+            PlanMealDialog();
+            break;
+        // case "save":
+        //     SaveMealDialog();
+        //     break;
         case "exit":
             WriteLine("Goodbye!");
             terminated = true;

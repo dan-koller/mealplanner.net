@@ -67,4 +67,45 @@ partial class Program
             return affected;
         }
     }
+
+    static int ClearPlans()
+    {
+        using (MealplannerContext db = new())
+        {
+            IQueryable<Plan> plans = db.Plans;
+
+            if (plans is null || (!plans.Any()))
+            {
+                // no meal with id found
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"No plans found in the database.");
+                Console.ResetColor();
+                return -1;
+            }
+            else
+            {
+                if (db.Plans is null)
+                {
+                    return -1;
+                }
+                else
+                {
+                    db.Plans.RemoveRange(plans);
+                }
+            }
+
+            int affected = db.SaveChanges();
+            return affected;
+        }
+    }
+
+    static int AddPlans(List<Plan> plans)
+    {
+        using (MealplannerContext db = new())
+        {
+            db.Plans.AddRange(plans);
+            db.SaveChanges();
+            return plans.Count;
+        }
+    }
 }

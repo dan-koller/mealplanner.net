@@ -126,4 +126,78 @@ partial class Program
             }
         }
     }
+
+    private static void PlanMealDialog()
+    {
+        List<string> weekdays = new() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        List<string> meals;
+        string category;
+        Plan plan;
+        List<Plan> plans = new();
+        foreach (string weekday in weekdays)
+        {
+            WriteLine(weekday);
+            category = "breakfast";
+            meals = GetMealsByCategory(category).Select(m => m.MealName).ToList();
+            string breakfast = GetMealFromList(meals, category, weekday);
+            category = "lunch";
+            meals = GetMealsByCategory(category).Select(m => m.MealName).ToList();
+            string lunch = GetMealFromList(meals, category, weekday);
+            category = "dinner";
+            meals = GetMealsByCategory(category).Select(m => m.MealName).ToList();
+            string dinner = GetMealFromList(meals, category, weekday);
+            plan = new Plan(weekday, breakfast, lunch, dinner);
+            plans.Add(plan);
+            WriteLine($"Yeah! We planned the meals for {weekday}.");
+        }
+        // overwrite existing plans before adding new ones (only planning for one week)
+        ClearPlans();
+
+        int affected = AddPlans(plans);
+        if (affected == -1)
+        {
+            WriteLine("Failed to add plans to the database.");
+        }
+        else
+        {
+            WriteLine($"Added {affected} plans to the database.");
+        }
+        PrintPlans(plans);
+    }
+
+    private static string GetMealFromList(List<string> meals, string category, string weekday)
+    {
+        bool isVerifiedOption = false;
+        string option = "";
+        foreach (string meal in meals)
+        {
+            WriteLine($"- {meal}");
+        }
+        WriteLine($"Choose the {category} for {weekday} from the list above:");
+        while (!isVerifiedOption)
+        {
+            option = ReadLine()!;
+            if (meals.Contains(option))
+            {
+                isVerifiedOption = true;
+            }
+            else
+            {
+                WriteLine("This meal doesn't exist. Choose a meal from the list above.");
+            }
+        }
+        return option;
+    }
+
+    private static void PrintPlans(List<Plan> plans)
+    {
+        foreach (Plan plan in plans)
+        {
+            WriteLine($"{plan.day}:");
+            WriteLine($"Breakfast: {plan.breakfast}");
+            WriteLine($"Lunch: {plan.lunch}");
+            WriteLine($"Dinner: {plan.dinner}");
+            WriteLine();
+        }
+    }
 }
