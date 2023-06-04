@@ -2,7 +2,8 @@ using Mealplanner.Net;
 
 namespace Mealplanner.Common.UnitTests;
 
-public class EntityModelTests
+[Collection("Serial")]
+public class MealplannerContextTests
 {
     [Fact]
     public void DatabaseConnectTest()
@@ -15,7 +16,11 @@ public class EntityModelTests
             Assert.True(db.Database.CanConnect());
         }
     }
+}
 
+[Collection("Serial")]
+public class EntityModelTests
+{
     [Fact]
     public void AddMealTest()
     {
@@ -58,13 +63,42 @@ public class EntityModelTests
 
             int currentIngredientCount = db.Ingredients.Count();
 
-            System.Console.WriteLine($"Initial ingredient count: {initialIngredientCount}");
-            System.Console.WriteLine($"Current ingredient count: {currentIngredientCount}");
-
             Assert.True(currentIngredientCount == initialIngredientCount + 1);
         }
     }
 
+    [Fact]
+    public void AddPlanTest()
+    {
+        List<string> weekdays = new() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        List<string> meals = new();
+        Plan plan;
+        List<Plan> plans = new();
+        foreach (string weekday in weekdays)
+        {
+            string breakfast = "test breakfast";
+            string lunch = "test lunch";
+            string dinner = "test dinner";
+            plan = new(weekday, breakfast, lunch, dinner);
+            plans.Add(plan);
+        }
+
+        using (MealplannerContext db = new())
+        {
+            // Add the test plans.
+            db.Plans.AddRange(plans);
+            db.SaveChanges();
+
+            Assert.True(db.Plans.Any(p => p.breakfast == "test breakfast"));
+            Assert.True(db.Plans.Any(p => p.lunch == "test lunch"));
+            Assert.True(db.Plans.Any(p => p.dinner == "test dinner"));
+        }
+    }
+}
+
+[Collection("Serial")]
+public class EntityModelDeleteTests
+{
     [Fact]
     public void DeleteMealTest()
     {
@@ -96,6 +130,23 @@ public class EntityModelTests
             }
 
             Assert.False(db.Ingredients.Any(i => i.IngredientName == "test"));
+        }
+    }
+
+    [Fact]
+    public void DeletePlanTest()
+    {
+        // Delete the test plans.
+        using (MealplannerContext db = new())
+        {
+            IQueryable<Plan> plans = db.Plans.Where(p => p.breakfast == "test breakfast");
+            if (plans.Any())
+            {
+                db.Plans.RemoveRange(plans);
+                db.SaveChanges();
+            }
+
+            Assert.False(db.Plans.Any(p => p.breakfast == "test breakfast"));
         }
     }
 }
