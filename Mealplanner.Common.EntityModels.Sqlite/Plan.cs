@@ -11,25 +11,25 @@ public partial class Plan
 
     [Required]
     [StringLength(50)]
-    public string day { get; set; }
+    public string Day { get; set; }
 
     [Required]
     [StringLength(50)]
-    public string breakfast { get; set; }
+    public string Breakfast { get; set; }
 
     [Required]
     [StringLength(50)]
-    public string lunch { get; set; }
+    public string Lunch { get; set; }
 
     [Required]
     [StringLength(50)]
-    public string dinner { get; set; }
+    public string Dinner { get; set; }
 
     public Plan(string day, string breakfast, string lunch, string dinner)
     {
-        this.day = day;
-        this.breakfast = breakfast;
-        this.lunch = lunch;
-        this.dinner = dinner;
+        this.Day = day;
+        this.Breakfast = breakfast;
+        this.Lunch = lunch;
+        this.Dinner = dinner;
     }
 }

@@ -89,9 +89,9 @@ public class EntityModelTests
             db.Plans.AddRange(plans);
             db.SaveChanges();
 
-            Assert.True(db.Plans.Any(p => p.breakfast == "test breakfast"));
-            Assert.True(db.Plans.Any(p => p.lunch == "test lunch"));
-            Assert.True(db.Plans.Any(p => p.dinner == "test dinner"));
+            Assert.True(db.Plans.Any(p => p.Breakfast == "test breakfast"));
+            Assert.True(db.Plans.Any(p => p.Lunch == "test lunch"));
+            Assert.True(db.Plans.Any(p => p.Dinner == "test dinner"));
         }
     }
 }
@@ -139,14 +139,14 @@ public class EntityModelDeleteTests
         // Delete the test plans.
         using (MealplannerContext db = new())
         {
-            IQueryable<Plan> plans = db.Plans.Where(p => p.breakfast == "test breakfast");
+            IQueryable<Plan> plans = db.Plans.Where(p => p.Breakfast == "test breakfast");
             if (plans.Any())
             {
                 db.Plans.RemoveRange(plans);
                 db.SaveChanges();
             }
 
-            Assert.False(db.Plans.Any(p => p.breakfast == "test breakfast"));
+            Assert.False(db.Plans.Any(p => p.Breakfast == "test breakfast"));
         }
     }
 }

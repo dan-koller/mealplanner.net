@@ -3,9 +3,9 @@ using Mealplanner.Net;
 
 partial class Program
 {
-    private static readonly Regex validMealCategory = new("breakfast|lunch|dinner");
-    private static readonly Regex validMealName = new("[a-zA-Z ]+");
-    private static readonly Regex validIngredients = new("([a-zA-Z]+,? ?)+(?<!,)(?<! )");
+    private static readonly Regex _validMealCategory = new("breakfast|lunch|dinner");
+    private static readonly Regex _validMealName = new("[a-zA-Z ]+");
+    private static readonly Regex _validIngredients = new("([a-zA-Z]+,? ?)+(?<!,)(?<! )");
 
 
     private static void AddMealDialog()
@@ -35,7 +35,7 @@ partial class Program
         while (!isVerifiedCategory)
         {
             mealCategory = ReadLine();
-            if (mealCategory is not null && validMealCategory.IsMatch(mealCategory))
+            if (mealCategory is not null && _validMealCategory.IsMatch(mealCategory))
             {
                 isVerifiedCategory = true;
             }
@@ -55,7 +55,7 @@ partial class Program
         while (!isVerifiedName)
         {
             mealName = ReadLine();
-            if (mealName is not null && validMealName.IsMatch(mealName))
+            if (mealName is not null && _validMealName.IsMatch(mealName))
             {
                 isVerifiedName = true;
             }
@@ -75,7 +75,7 @@ partial class Program
         while (!isVerifiedIngredients)
         {
             ingredients = ReadLine()!.Split(",");
-            if (ingredients is not null && validIngredients.IsMatch(IngredientArrayToString(ingredients!)))
+            if (ingredients is not null && _validIngredients.IsMatch(IngredientArrayToString(ingredients!)))
             {
                 ingredients = RemoveWhitespace(ingredients);
                 isVerifiedIngredients = true;
@@ -96,7 +96,7 @@ partial class Program
         while (!isVerifiedCategory)
         {
             mealCategory = ReadLine();
-            if (mealCategory is not null && validMealCategory.IsMatch(mealCategory))
+            if (mealCategory is not null && _validMealCategory.IsMatch(mealCategory))
             {
                 isVerifiedCategory = true;
                 ShowMealByCategory(mealCategory);
@@ -193,10 +193,10 @@ partial class Program
     {
         foreach (Plan plan in plans)
         {
-            WriteLine($"{plan.day}:");
-            WriteLine($"Breakfast: {plan.breakfast}");
-            WriteLine($"Lunch: {plan.lunch}");
-            WriteLine($"Dinner: {plan.dinner}");
+            WriteLine($"{plan.Day}:");
+            WriteLine($"Breakfast: {plan.Breakfast}");
+            WriteLine($"Lunch: {plan.Lunch}");
+            WriteLine($"Dinner: {plan.Dinner}");
             WriteLine();
         }
     }
