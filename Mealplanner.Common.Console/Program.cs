@@ -15,9 +15,9 @@ while (!terminated)
         case "plan":
             PlanMealDialog();
             break;
-        // case "save":
-        //     SaveMealDialog();
-        //     break;
+        case "save":
+            SavePlanDialog();
+            break;
         case "exit":
             WriteLine("Goodbye!");
             terminated = true;
@@ -28,25 +28,10 @@ while (!terminated)
     }
 }
 
-// // test to see if a new meal can be added to the database
-// string mealName = "Baked Cauliflower";
-// string mealCategory = "Lunch";
-// string[] mealIngredients = new string[] { "Cauliflower", "Olive Oil", "Salt", "Pepper" };
-
-// // convert the string[] to a string
-// string mealIngredientsString = Program.IngredientArrayToString(mealIngredients);
-
-// // create a new meal
-// Meal newMeal = new Meal(mealName, mealCategory, mealIngredientsString);
-
-// // add the new meal to the database
-// int id = Program.AddMeal(newMeal);
-
-// // test to see if the meal was added to the database
-// WriteLine($"Added meal with id {id} to the database.");
-
-// // test to see if the meal can be deleted from the database
-// int latestId = Program.GetLatestMealId();
+/*
+The functionality to delete a meal by its id is not implemented in the program, but it is possible to do so.
+The following code snippet shows how to delete a meal by its id:
+*/
+// int latestId = GetLatestMealId();
 // WriteLine($"Latest meal id is {latestId}.");
-// int affected = Program.DeleteMealById(latestId);
-// WriteLine($"Deleted meal with id {latestId} from the database.");
+// int affected = DeleteMealById(latestId);

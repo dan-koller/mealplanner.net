@@ -200,4 +200,68 @@ partial class Program
             WriteLine();
         }
     }
+
+    private static void SavePlanDialog()
+    {
+        if (!PlanExists())
+        {
+            WriteLine("Unable to save. Please plan your meals first.");
+            return;
+        }
+        List<Ingredient> ingredients = GetIngredientsForPlan();
+        List<string> uniqueIngredients = RemoveDuplicatesFromIngredients(ingredients);
+        WriteLine("Input a filename:");
+        string? filename = ReadLine();
+        if (string.IsNullOrEmpty(filename))
+        {
+            filename = "plan.txt";
+        }
+        SavePlanToFile(filename, uniqueIngredients);
+        WriteLine("Saved!");
+    }
+
+    private static bool PlanExists()
+    {
+        return GetAllPlans().Count > 0;
+    }
+
+    private static List<string> RemoveDuplicatesFromIngredients(List<Ingredient> ingredients)
+    {
+        Dictionary<string, int> frequency = new();
+        foreach (Ingredient ingredient in ingredients)
+        {
+            if (frequency.ContainsKey(ingredient.IngredientName))
+            {
+                frequency[ingredient.IngredientName]++;
+            }
+            else
+            {
+                frequency[ingredient.IngredientName] = 1;
+            }
+        }
+
+        List<string> uniqueIngredients = new();
+        foreach (var kvp in frequency)
+        {
+            if (kvp.Value > 1)
+            {
+                uniqueIngredients.Add($"{kvp.Key} x{kvp.Value}");
+            }
+            else
+            {
+                uniqueIngredients.Add(kvp.Key);
+            }
+        }
+
+        return uniqueIngredients;
+    }
+
+    private static void SavePlanToFile(string filename, List<string> uniqueIngredients)
+    {
+        using StreamWriter file = new(filename);
+        foreach (string ingredient in uniqueIngredients)
+        {
+            file.WriteLine(ingredient);
+        }
+    }
 }

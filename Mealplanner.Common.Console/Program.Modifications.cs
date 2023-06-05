@@ -37,6 +37,11 @@ partial class Program
         }
     }
 
+    /// <summary>
+    /// This method is not currently used, but is kept for future use.
+    /// </summary>
+    /// <param name="id">The id of the meal to be deleted.</param>
+    /// <returns>An integer representing the number of affected rows or -1 if no meal was found.</returns>
     static int DeleteMealById(int id)
     {
         using (MealplannerContext db = new())
