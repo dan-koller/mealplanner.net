@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection; // IServiceCollection
 
 namespace Mealplanner.Net;
 
+// Only used for web projects to add the MealplannerContext to the IServiceCollection for dependency injection
+// and to configure the database provider and logging.
 public static class MealplannerContextExtensions
 {
     /// <summary>
